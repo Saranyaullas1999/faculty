@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-viewfaculty',
@@ -7,10 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewfacultyComponent implements OnInit {
 
-  constructor() { }
+  constructor(private myapi:ApiService) {
+    this.fetchData()
+   }
 
+ fetchData=()=>{
+  this.myapi.viewFaculty().subscribe(
+    (data)=>{
+      this.facultyData=data
+    }
+  )
+ }
 
-  facultyData=[{"id":1,"name":"Anisha","department":"ComputerScience & Engineering","designation":"Assistant Professor","qualification":"MCA"},{"id":2,"name":"Leena","department":"Civil Engineering","designation":"Professor","qualification":"Civil Engineering"},{"id":3,"name":"Nitha","department":"Electronics & Communication Engineering","designation":"Professor","qualification":"EEE"},{"id":4,"name":"Sreekumar","department":"ComputerScience & Engineering","designation":"Associate Professor","qualification":"MCA"}]
+  facultyData:any=[]
 
   ngOnInit(): void {
   }
